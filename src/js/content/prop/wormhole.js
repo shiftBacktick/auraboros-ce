@@ -46,7 +46,48 @@ content.prop.wormhole = engine.prop.base.invent({
     engine.audio.ramp.set(this.synth.param.carrierGain, 1 - (damage / 2))
     engine.audio.ramp.set(this.synth.param.fmod.detune, engine.utility.lerp(0, -600, damage))
 
-    // TODO: Directional cue
+    const directionalRatio = this.calculateDirectionalRatio()
+
+    if (directionalRatio) {
+      if (!this.directionalSynth) {
+        this.createDirectionalSynth()
+      }
+      this.updateDirectionalSynth(directionalRatio)
+    } else if (this.directionalSynth) {
+      this.destroyDirectionalSynth()
+    }
+  },
+  calculateGainCompensation: function (coefficient = 1) {
+    const power = engine.utility.distanceToPower(
+      engine.utility.clamp(this.distance, 0, content.const.horizon / 2)
+    )
+
+    return coefficient / power
+  },
+  calculateDirectionalRatio: function () {
+    const atan2 = Math.atan2(this.relative.y, this.relative.x),
+      cos = Math.cos(atan2)
+
+    if (cos < engine.const.unit2) {
+      return 0
+    }
+
+    return engine.utility.scale(cos, engine.const.unit2, 1, 0, 1) ** 100
+  },
+  createDirectionalSynth: function () {
+    this.directionalSynth = engine.audio.synth.createSimple({
+      frequency: this.rootFrequency * 4,
+      type: 'triangle',
+    }).filtered({
+      frequency: this.rootFrequency * 2,
+    }).connect(this.output)
+
+    return this
+  },
+  destroyDirectionalSynth: function () {
+    this.directionalSynth.stop()
+    delete this.directionalSynth
+    return this
   },
   hit: function () {
     if (this.isDead) {
@@ -144,8 +185,11 @@ content.prop.wormhole = engine.prop.base.invent({
     this.synth.param.fmod.depth.exponentialRampToValueAtTime(this.rootFrequency, now + 1/16)
     this.synth.param.fmod.depth.exponentialRampToValueAtTime(this.rootFrequency / 2, now + 1)
 
-    // TODO: Gain compensation for distance
-
+    return this
+  },
+  updateDirectionalSynth: function (strength = 0) {
+    const gain = strength * this.calculateGainCompensation(engine.utility.fromDb(-21))
+    engine.audio.ramp.set(this.directionalSynth.param.gain, gain)
     return this
   },
 })

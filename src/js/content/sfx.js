@@ -6,7 +6,7 @@ content.sfx.bus.gain.value = engine.utility.fromDb(0)
 content.sfx.attack = ({
   frequency = 440,
 } = {}) => {
-  const detune = engine.utility.random.float(-25, 25)
+  const detune = engine.utility.random.float(-12.5, 12.5)
 
   const synth = engine.audio.synth.createSimple({
     detune,
