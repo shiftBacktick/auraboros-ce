@@ -1,0 +1,41 @@
+.a-splash {}
+  .a-splash--highscore {
+    margin-top: 1em;
+  }
+  .a-splash--lockup {
+    animation: a-splash--lockup 8s linear 0s infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-color: #D00000;
+    background-image: linear-gradient(0deg, #FFBA08, #FAA307, #F48C06, #E85D04, #DC2F02, #D00000, #FFBA08);
+    background-size: 200% 200%;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+  .a-splash--logo {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    letter-spacing: 0;
+  }
+  .a-splash--row {
+    display: flex;
+    font-family: FiraMonoRegular, monospace;
+    justify-content: space-between;
+    margin-top: -0.5em;
+  }
+  .a-splash--title {
+    font-family: RevolverBlackletterRegular, fantasy;
+    font-size: 12em;
+    line-height: 1;
+  }
+
+@keyframes a-splash--lockup {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 200%;
+  }
+}

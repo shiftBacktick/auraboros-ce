@@ -1,0 +1,22 @@
+.a-gameOver {}
+  .a-gameOver--highscore {
+    margin-top: 1em;
+  }
+  .a-gameOver--restart {
+    margin-top: 3rem;
+  }
+  .a-gameOver--success {
+    font-family: TimelessBold, serif;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .a-gameOver--score {
+    font-size: 1.5em;
+    margin-top: 2rem;
+  }
+  .a-gameOver--title {
+    font-family: RevolverBlackletterRegular, fantasy;
+    font-size: 6em;
+    line-height: 1;
+  }

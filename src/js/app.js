@@ -11,7 +11,10 @@ const app = {
 
     return this
   },
+  screen: {},
+  state: {},
   utility: {},
+  version: () => '0.0.0', // XXX: Replaced via Gulpfile.js
 }
 
 engine.ready(() => app.activate())

@@ -5,10 +5,14 @@ app.controls.keyboard = {
 
     const moveBackward = keys.ArrowDown || keys.KeyS || keys.Numpad5,
       moveForward = keys.ArrowUp || keys.KeyW || keys.Numpad8,
-      strafeLeft = keys.KeyA || keys.Numpad4,
-      strafeRight = keys.KeyD || keys.Numpad6,
+      strafeLeft = keys.KeyA || keys.KeyZ || keys.Numpad4,
+      strafeRight = keys.KeyD || keys.KeyX || keys.Numpad6,
       turnLeft = keys.ArrowLeft || keys.KeyQ || keys.Numpad7,
       turnRight = keys.ArrowRight || keys.KeyE || keys.Numpad9
+
+    if (keys.ControlLeft || keys.ControlRight || keys.Space) {
+      state.attack = true
+    }
 
     if (moveBackward && !moveForward) {
       state.y = -1

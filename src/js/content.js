@@ -1,3 +1,9 @@
 const content  = {
-  prop: {},
+  prop: {
+    enemy: {},
+  },
+  system: {
+    audio: {},
+  },
+  utility: {},
 }

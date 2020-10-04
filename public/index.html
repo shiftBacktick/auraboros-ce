@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>syngen</title>
+    <title>Auraboros</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="stylesheet" type="text/css" href="./styles.min.css" />
@@ -9,6 +9,57 @@
   <body role="application">
     <main class="a-app">
       <canvas class="a-app--overlaySupport"></canvas>
+
+      <div class="a-app--screen a-app--game">
+        <section class="c-screen a-game" tabindex="-1" aria-label="Game"></section>
+      </div>
+
+      <div class="a-app--screen a-app--gameOver">
+        <section class="c-screen a-gameOver" tabindex="-1">
+          <h1 class="a-gameOver--title">Singularity Assimilated</h1>
+          <div class="a-gameOver--score">
+            <span class="a-gameOver--scoreLabel">Mass:</span>
+            <span class="a-gameOver--scoreValue">0</span>
+          </div>
+          <div class="a-gameOver--success">Significant Matter Devoured</div>
+          <button class="a-gameOver--restart c-button" type="button">Revert Spacetime</button>
+          <div class="a-gameOver--highscore">
+            <span class="a-gameOver--highscoreLabel">Greatest Singularity:</span>
+            <span class="a-gameOver--highscoreValue">0</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--splash">
+        <section class="c-screen a-splash" tabindex="-1">
+          <h1 class="a-splash--logo">
+            <div class="a-splash--lockup">
+              <div class="a-splash--title">Auraboros</div>
+              <div class="a-splash--row">
+                <div class="a-splash--version"></div>
+                <div class="a-splash--author">by shiftBacktick</div>
+              </div>
+            </div>
+          </h1>
+          <button class="a-splash--start c-button" type="button">Rise from Eternity</button>
+          <div class="a-splash--highscore">
+            <span class="a-splash--highscoreLabel">Greatest Singularity:</span>
+            <span class="a-splash--highscoreValue">0</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--tutorial">
+        <section class="c-screen a-tutorial" tabindex="-1">
+          <h1 class="a-tutorial--title">Let There Be Light</h1>
+          <div class="a-tutorial--content">
+            <p>In the beginning there were infinite singularities vying to become the universe we know.</p>
+            <p>During each timeline you embody a singularity at the genesis of spacetime. Rival singularities emerge from wormholes that perforate its fabric. Eject particles to disrupt their gravity and outmaneuver them to avoid certain assimilation.</p>
+            <p>Can you devour their matter to deliver the universe?</p>
+          </div>
+          <button class="a-tutorial--start c-button">Ignite Genesis</button>
+        </section>
+      </div>
     </main>
     <script src="./scripts.min.js"></script>
   </body>

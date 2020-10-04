@@ -1,0 +1,24 @@
+@font-face {
+  font-family: FiraMonoRegular;
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/firamono-regular.woff') format('woff');
+}
+@font-face {
+  font-family: RevolverBlackletterRegular;
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/revolverblackletter-regular.woff') format('woff');
+}
+@font-face {
+  font-family: TimelessBold;
+  font-style: normal;
+  font-weight: 700;
+  src: url('font/timeless-bold.woff') format('woff');
+}
+@font-face {
+  font-family: TimelessRegular;
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/timeless-regular.woff') format('woff');
+}

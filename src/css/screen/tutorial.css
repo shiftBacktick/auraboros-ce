@@ -1,0 +1,16 @@
+.a-tutorial {}
+  .a-tutorial--content {
+    margin-top: 1.5em;
+    max-width: 60ch;
+  }
+  .a-tutorial--content * + * {
+    margin-top: 1.5em;
+  }
+  .a-tutorial--start {
+    margin-top: 1.5rem;
+  }
+  .a-tutorial--title {
+    font-family: RevolverBlackletterRegular, fantasy;
+    font-size: 6em;
+    line-height: 1;
+  }

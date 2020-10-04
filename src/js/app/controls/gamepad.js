@@ -1,7 +1,10 @@
 app.controls.gamepad = {
   game: function () {
+    // TODO: Rework to allow D-Pad movement (forward/backward/turning)
+
     if (engine.input.gamepad.hasAxis(2)) {
       return {
+        attack: engine.input.gamepad.isDigital(6) || engine.input.gamepad.isDigital(7),
         rotate: engine.input.gamepad.getAxis(2, true),
         x: engine.input.gamepad.getAxis(0),
         y: engine.input.gamepad.getAxis(1, true),
@@ -9,6 +12,7 @@ app.controls.gamepad = {
     }
 
     return {
+      attack: engine.input.gamepad.isDigital(6) || engine.input.gamepad.isDigital(7),
       rotate: engine.input.gamepad.getAxis(0, true),
       x: 0,
       y: engine.input.gamepad.getAxis(1, true),
