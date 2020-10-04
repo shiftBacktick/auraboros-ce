@@ -4,7 +4,8 @@ content.system.wormholes = (() => {
 
   const frequencies = [38, 45, 47, 48].map(engine.utility.midiToFrequency)
 
-  let cooldown = 0
+  let cooldown = 0,
+    limit = 0
 
   function isCooldown() {
     return performance.now() >= cooldown
@@ -31,40 +32,47 @@ content.system.wormholes = (() => {
     const angle = engine.utility.random.float(0, 2 * Math.PI),
       radius = content.const.horizon / 2
 
-    wormholes.add(
-      engine.props.create(content.prop.wormhole, {
-        radius: content.const.wormholeRadius,
-        rootFrequency: frequencies[wormholes.size],
-        x: Math.cos(angle) * radius,
-        y: Math.sin(angle) * radius,
-      })
-    )
+    const wormhole = engine.props.create(content.prop.wormhole, {
+      radius: content.const.wormholeRadius,
+      rootFrequency: frequencies[wormholes.size],
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius,
+    })
+
+    wormholes.add(wormhole)
+    pubsub.emit('spawn', wormhole)
 
     resetCooldown()
   }
 
   return engine.utility.pubsub.decorate({
     get: () => [...wormholes],
+    import: function () {
+      setup()
+      return this
+    },
     kill: function (wormhole) {
       engine.props.destroy(wormhole)
       wormholes.delete(wormhole)
 
       resetCooldown()
 
+      if (limit < content.const.wormholeLimitMax) {
+        limit += 1
+      }
+
       pubsub.emit('kill', wormhole)
 
       return this
     },
-    import: function () {
-      setup()
-      return this
-    },
+    limit: () => limit,
     reset: function () {
+      limit = content.const.wormholeLimitMin
       wormholes.clear()
       return this
     },
     update: function () {
-      if (wormholes.size >= content.const.wormholeLimit) {
+      if (wormholes.size >= limit) {
         return this
       }
 

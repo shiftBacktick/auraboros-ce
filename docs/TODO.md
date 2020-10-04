@@ -11,7 +11,7 @@
 - Finish manual
 
 ## Nice to have
-- Slower difficulty curve with gradual spawns
+- Wormhole spawn alert
 - Matter prop that spawns on kill and flies toward origin (sound changes based on score)
 - Horizon directional cue
 - Origin cue

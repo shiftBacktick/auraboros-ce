@@ -1,6 +1,7 @@
 content.const = {
   enemyAcceleration: engine.const.gravity, // m/s
-  enemyLimit: 16,
+  enemyLimitMax: 12,
+  enemyLimitMin: 1,
   enemyRadius: 0.5, // m
   enemyReaction: 1/8, // % chance
   enemySpeed: 2, // m/s
@@ -10,9 +11,10 @@ content.const = {
   projectileSpeed: 25, // m/s
   projectileTimeout: 1, // s
   wormholeChargeTime: 15, // s
-  wormholeLimit: 4,
+  wormholeLimitMax: 4,
+  wormholeLimitMin: 1,
   wormholeRadius: 2, // m
-  wormholeSpawnRate: 30 * 1000, // ms
+  wormholeSpawnRate: 15 * 1000, // ms
 }
 
 engine.const.distancePower = 2

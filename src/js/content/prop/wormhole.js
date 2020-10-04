@@ -121,7 +121,7 @@ content.prop.wormhole = engine.prop.base.invent({
 
     synth.param.gain.setValueAtTime(engine.const.zeroGain, now)
     synth.param.gain.exponentialRampToValueAtTime(1, now + 1/32)
-    synth.param.gain.linearRampToValueAtTime(1/256, now + 2)
+    synth.param.gain.linearRampToValueAtTime(1/64, now + 2)
 
     synth.param.mod.frequency.setValueAtTime(27.5, now)
     synth.param.mod.frequency.exponentialRampToValueAtTime(3.4375, now + 2)

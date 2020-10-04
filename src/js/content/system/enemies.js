@@ -2,7 +2,8 @@ content.system.enemies = (() => {
   const enemies = new Set(),
     pubsub = engine.utility.pubsub.create()
 
-  let cooldown = 0
+  let cooldown = 0,
+    limit = 0
 
   function isCooldown() {
     return performance.now() >= cooldown
@@ -35,22 +36,29 @@ content.system.enemies = (() => {
   }
 
   return engine.utility.pubsub.decorate({
+    get: () => [...enemies],
     kill: function (prop) {
       engine.props.destroy(prop)
       enemies.delete(prop)
 
       resetCooldown()
 
+      if (limit < content.const.enemyLimitMax) {
+        limit += 1
+      }
+
       pubsub.emit('kill', prop)
 
       return this
     },
+    limit: () => limit,
     reset: function () {
       enemies.clear()
+      limit = content.const.enemyLimitMin
       return this
     },
     update: function () {
-      if (enemies.size >= content.const.enemyLimit) {
+      if (enemies.size >= limit) {
         return this
       }
 
