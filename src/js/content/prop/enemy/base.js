@@ -5,7 +5,7 @@ content.prop.enemy.base = engine.prop.base.invent({
   points: 0,
   onConstruct: function () {
     this.createSynth()
-    this.velocity = this.getTargetVelocity().scale(0.5)
+    this.velocity = this.getSpawnVelocity()
   },
   onDestroy: function () {
     this.destroySynth()
@@ -34,6 +34,15 @@ content.prop.enemy.base = engine.prop.base.invent({
   },
   createSynth: function () {},
   destroySynth: function () {},
+  getSpawnVelocity: function () {
+    const velocity = this.getTargetVelocity().inverse().rotateEuler({
+      yaw: engine.utility.random.float(-1, 1) * Math.PI / 2,
+    })
+
+    velocity.z = 0
+
+    return velocity
+  },
   getTargetVelocity: function () {
     const velocity = engine.position.getVector()
       .subtract(this.vector())
