@@ -1,4 +1,4 @@
-content.system.audio.horizon = (() => {
+content.system.audio.arena = (() => {
   const bus = engine.audio.mixer.createBus(),
     context = engine.audio.context(),
     merger = context.createChannelMerger(),
@@ -21,6 +21,7 @@ content.system.audio.horizon = (() => {
   mixer.connect(bus)
 
   return {
+    // TODO: Blur / unblur
     reset: function () {
       engine.audio.ramp.set(mixer.gain, engine.const.zeroGain)
       return this
@@ -42,7 +43,7 @@ engine.loop.on('frame', ({paused}) => {
     return
   }
 
-  content.system.audio.horizon.update()
+  content.system.audio.arena.update()
 })
 
-engine.state.on('reset', () => content.system.audio.horizon.reset())
+engine.state.on('reset', () => content.system.audio.arena.reset())

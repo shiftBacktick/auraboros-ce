@@ -8,13 +8,11 @@
 - SFX
   - Game start (big bang)
   - Game over (reverse of big bang)
+- Finish manual
 
 ## Nice to have
-- Rework wormholes so they spawn randomly
-  - Start with 1 random wormhole (at random angle halfway between horizon)
-  - Every 60 seconds spawn a wormhole until 4 are active
-  - Wormholes take 15 seconds to become active
+- Slower difficulty curve with gradual spawns
 - Matter prop that spawns on kill and flies toward origin (sound changes based on score)
 - Horizon directional cue
-- Origin prop
-- Manual
+- Origin cue
+- Wormhole directional cue

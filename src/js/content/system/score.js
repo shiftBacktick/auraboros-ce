@@ -15,7 +15,8 @@ content.system.score = (() => {
 })()
 
 engine.ready(() => {
-  content.system.spawner.on('kill', (prop) => content.system.score.increment(prop.points))
+  content.system.enemies.on('kill', (prop) => content.system.score.increment(prop.points))
+  content.system.wormholes.on('kill', (prop) => content.system.score.increment(prop.points))
 })
 
 engine.loop.on('frame', ({delta, paused}) => {

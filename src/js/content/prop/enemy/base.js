@@ -58,7 +58,7 @@ content.prop.enemy.base = engine.prop.base.invent({
   hitSound: function () {},
   kill: function () {
     this.isDead = true
-    this.killSound().then(() => content.system.spawner.kill(this))
+    this.killSound().then(() => content.system.enemies.kill(this))
     return this
   },
   killSound: function () {

@@ -53,7 +53,7 @@ content.system.attack = (() => {
       for (const prop of engine.props.get()) {
         if (content.prop.enemy.base.isPrototypeOf(prop) && !prop.isDead) {
           enemies.insert(prop)
-        } else if (content.prop.wormhole.isPrototypeOf(prop) && prop.isActive) {
+        } else if (content.prop.wormhole.isPrototypeOf(prop) && !prop.isDead) {
           wormholes.insert(prop)
         }
       }
