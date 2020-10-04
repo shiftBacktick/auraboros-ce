@@ -1,7 +1,7 @@
 content.prop.enemy.generic = content.prop.enemy.base.invent({
   name: 'enemy/generic',
   health: 1,
-  points: 1,
+  points: 5,
   call: function () {
     return engine.utility.timing.promise(0)
   },

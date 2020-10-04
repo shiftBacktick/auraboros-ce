@@ -2,7 +2,7 @@ content.prop.wormhole = engine.prop.base.invent({
   name: 'wormhole',
   damage: 0,
   health: 100,
-  points: 150,
+  points: 500,
   onConstruct: function ({
     rootFrequency = 440,
   }) {

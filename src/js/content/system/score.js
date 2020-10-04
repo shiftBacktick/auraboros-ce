@@ -25,7 +25,7 @@ engine.loop.on('frame', ({delta, paused}) => {
   }
 
   if (engine.position.getVector().distance() < content.const.horizon) {
-    content.system.score.increment(delta / 2)
+    content.system.score.increment(delta)
   }
 })
 
