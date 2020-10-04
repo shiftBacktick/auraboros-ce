@@ -12,6 +12,4 @@
 
 ## Nice to have
 - Matter prop that spawns on kill and flies toward origin (sound changes based on score)
-- Horizon directional cue
-- Origin cue
 - Wormhole directional cue

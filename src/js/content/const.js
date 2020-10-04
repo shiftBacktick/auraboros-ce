@@ -7,6 +7,7 @@ content.const = {
   enemySpeed: 2, // m/s
   enemySpawnRate: 1 * 1000, // ms
   horizon: 50, // m
+  idealScore: (1 * 60) * (60 + (5 * 60) + (500 * 4)),
   projectileFireRate: 1/10 * 1000, // ms
   projectileSpeed: 25, // m/s
   projectileTimeout: 1, // s
