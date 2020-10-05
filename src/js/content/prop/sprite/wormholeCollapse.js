@@ -40,3 +40,14 @@ content.prop.sprite.wormholeCollapse = content.prop.sprite.base.invent({
     return engine.utility.timing.promise(duration * 1000)
   },
 })
+
+engine.ready(() => {
+  content.system.wormholes.on('kill', (wormhole) => {
+    content.prop.sprite.wormholeCollapse.trigger({
+      x: wormhole.x,
+      y: wormhole.y,
+    }, {
+      rootFrequency: wormhole.rootFrequency,
+    })
+  })
+})

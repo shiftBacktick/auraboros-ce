@@ -52,9 +52,8 @@ content.system.wormholes = (() => {
       return this
     },
     kill: function (wormhole) {
-      engine.props.destroy(wormhole)
+      wormhole.onKill().then(() => engine.props.destroy(wormhole))
       wormholes.delete(wormhole)
-
       resetCooldown()
 
       if (limit < content.const.wormholeLimitMax) {

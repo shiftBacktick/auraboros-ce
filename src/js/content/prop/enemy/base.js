@@ -57,7 +57,7 @@ content.prop.enemy.base = engine.prop.base.invent({
     this.damage += 1
 
     if (this.damage >= this.health) {
-      this.kill()
+      content.system.enemies.kill(this)
     } else {
       this.hitSound()
     }
@@ -65,12 +65,11 @@ content.prop.enemy.base = engine.prop.base.invent({
     return this
   },
   hitSound: function () {},
-  kill: function () {
-    this.isDead = true
-    this.killSound().then(() => content.system.enemies.kill(this))
-    return this
-  },
   killSound: function () {
     return engine.utility.timing.promise(0)
+  },
+  onKill: function () {
+    this.isDead = true
+    return this.killSound()
   },
 })

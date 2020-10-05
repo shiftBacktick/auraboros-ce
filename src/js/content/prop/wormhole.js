@@ -98,7 +98,7 @@ content.prop.wormhole = engine.prop.base.invent({
     this.damage += 1
 
     if (this.damage >= this.health) {
-      this.kill()
+      content.system.wormholes.kill(this)
     } else {
       this.hitSound()
     }
@@ -133,7 +133,11 @@ content.prop.wormhole = engine.prop.base.invent({
 
     return this
   },
-  kill: function () {
+  onKill: function () {
+    if (this.directionalSynth) {
+      this.destroyDirectionalSynth()
+    }
+
     this.isActive = false
     this.isDead = true
 
@@ -144,23 +148,16 @@ content.prop.wormhole = engine.prop.base.invent({
     engine.audio.ramp.hold(this.synth.param.fmod.depth)
     engine.audio.ramp.hold(this.synth.param.gain)
 
-    const now = engine.audio.time()
+    const duration = 2,
+      now = engine.audio.time()
 
-    this.synth.param.amod.depth.linearRampToValueAtTime(0, now + 2)
-    this.synth.param.detune.linearRampToValueAtTime(-1200, now + 2)
-    this.synth.param.fmod.depth.linearRampToValueAtTime(0, now + 2)
-    this.synth.param.fmod.detune.linearRampToValueAtTime(-600, now + 2)
+    this.synth.param.amod.depth.linearRampToValueAtTime(0, now + duration)
+    this.synth.param.detune.linearRampToValueAtTime(-1200, now + duration)
+    this.synth.param.fmod.depth.linearRampToValueAtTime(0, now + duration)
+    this.synth.param.fmod.detune.linearRampToValueAtTime(-600, now + duration)
     this.synth.param.gain.exponentialRampToValueAtTime(1/4, now + 1/32)
 
-    content.prop.sprite.wormholeCollapse.trigger(this, {
-      rootFrequency: this.rootFrequency,
-    }).then(() => content.system.wormholes.kill(this))
-
-    if (this.directionalSynth) {
-      this.destroyDirectionalSynth()
-    }
-
-    return this
+    return engine.utility.timing.promise(duration * 1000)
   },
   onSpawn: function () {
     engine.audio.ramp.hold(this.synth.param.detune)

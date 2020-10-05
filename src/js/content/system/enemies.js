@@ -37,17 +37,16 @@ content.system.enemies = (() => {
 
   return engine.utility.pubsub.decorate({
     get: () => [...enemies],
-    kill: function (prop) {
-      engine.props.destroy(prop)
-      enemies.delete(prop)
-
+    kill: function (enemy) {
+      enemy.onKill().then(() => engine.props.destroy(enemy))
+      enemies.delete(enemy)
       resetCooldown()
 
       if (limit < content.const.enemyLimitMax) {
         limit += 1
       }
 
-      pubsub.emit('kill', prop)
+      pubsub.emit('kill', enemy)
 
       return this
     },
