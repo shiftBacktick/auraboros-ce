@@ -100,8 +100,9 @@ gulp.task('dist-html5', () => {
   // XXX: Archive has no root directory
   return gulp.src([
     'public/favicon.png',
-    'public/fonts/*',
+    'public/font/*',
     'public/index.html',
+    'public/manual.html',
     'public/scripts.min.js',
     'public/styles.min.css',
   ], {base: 'public'}).pipe(

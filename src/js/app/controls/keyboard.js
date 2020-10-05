@@ -10,7 +10,7 @@ app.controls.keyboard = {
       turnLeft = keys.ArrowLeft || keys.KeyQ || keys.Numpad7,
       turnRight = keys.ArrowRight || keys.KeyE || keys.Numpad9
 
-    if (keys.ControlLeft || keys.ControlRight || keys.Space) {
+    if (keys.ControlLeft || keys.ControlRight || keys.Numpad0 || keys.Space) {
       state.attack = true
     }
 
