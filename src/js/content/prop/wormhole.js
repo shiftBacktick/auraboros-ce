@@ -77,13 +77,13 @@ content.prop.wormhole = engine.prop.base.invent({
   createDirectionalSynth: function () {
     this.directionalSynth = engine.audio.synth.createAm({
       carrierGain: 1,
-      carrierFrequency: this.rootFrequency * 8,
+      carrierFrequency: this.rootFrequency * 4,
       carrierType: 'triangle',
       modDepth: engine.const.zeroGain,
       modFrequency: 0,
       modType: 'square',
     }).filtered({
-      frequency: this.rootFrequency * 6,
+      frequency: this.rootFrequency * 3,
     }).connect(this.output)
 
     return this
@@ -185,7 +185,7 @@ content.prop.wormhole = engine.prop.base.invent({
       : engine.utility.lerp(-500, 0, strength)
 
     const filterDetune = isLocked
-      ? -1200
+      ? -700
       : 0
 
     const gain = isLocked
