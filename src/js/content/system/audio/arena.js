@@ -48,8 +48,7 @@ content.system.audio.arena = (() => {
     },
     update: function () {
       const distance = engine.position.getVector().distance(),
-        score = content.system.score.get(),
-        scoreRatio = engine.utility.clamp(score / content.const.idealScore, 0, 1)
+        scoreRatio = content.system.score.getRatio()
 
       const boundaryDistanceRatio = engine.utility.clamp(distance / content.const.horizon, 0, 1),
         singularityDistanceRatio = engine.utility.clamp(distance / (content.const.horizon / 2), 0, 1)

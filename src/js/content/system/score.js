@@ -3,6 +3,7 @@ content.system.score = (() => {
 
   return {
     get: () => Math.floor(score),
+    getRatio: () => engine.utility.clamp(score / content.const.idealScore, 0, 1),
     increment: function (value = 0) {
       score += value
       return this
