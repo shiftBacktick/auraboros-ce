@@ -55,6 +55,7 @@ content.prop.enemy.base = engine.prop.base.invent({
   },
   onKill: function () {
     this.isDead = true
+    this.velocity.set()
     return this.killSound()
   },
 })

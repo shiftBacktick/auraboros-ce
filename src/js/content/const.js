@@ -1,6 +1,6 @@
 content.const = {
   enemyAcceleration: engine.const.gravity, // m/s
-  enemyLimitMax: 8,
+  enemyLimitMax: 12,
   enemyLimitMin: 1,
   enemyRadius: 0.5, // m
   enemyReaction: 1/8, // % chance

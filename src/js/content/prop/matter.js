@@ -26,7 +26,7 @@ content.prop.matter = engine.prop.base.invent({
     this.synth.chainStop(
       engine.audio.synth.createLfo({
         depth: frequency / 4,
-        frequency: 1/2,
+        frequency: 1/5,
       }).connect(this.synth.filter.frequency)
     )
   },

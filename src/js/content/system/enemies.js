@@ -2,8 +2,21 @@ content.system.enemies = (() => {
   const enemies = new Set(),
     pubsub = engine.utility.pubsub.create()
 
+  const activeFrequencies = new Set()
+
+  const allowedFrequencies = [
+    57, 59, 60, 62, 64, 65, 67,
+    69, 71, 72, 74, 76, 77, 79,
+    81, 83, 84, 86, 88, 89, 91,
+  ].map(engine.utility.midiToFrequency)
+
   let cooldown = 0,
     limit = 0
+
+  function getUnusedFrequency() {
+    const frequencies = allowedFrequencies.filter((f) => !activeFrequencies.has(f))
+    return engine.utility.choose(frequencies, Math.random())
+  }
 
   function isCooldown() {
     return performance.now() >= cooldown
@@ -22,11 +35,15 @@ content.system.enemies = (() => {
       return resetCooldown()
     }
 
-    const wormhole = engine.utility.choose(wormholes, Math.random())
+    const frequency = getUnusedFrequency(),
+      wormhole = engine.utility.choose(wormholes, Math.random())
+
+    activeFrequencies.add(frequency)
 
     enemies.add(
       engine.props.create(content.prop.enemy.generic, {
         radius: content.const.enemyRadius,
+        rootFrequency: frequency,
         x: wormhole.x + (wormhole.radius * engine.const.unit2 * engine.utility.random.float(-1, 1)),
         y: wormhole.y + (wormhole.radius * engine.const.unit2 * engine.utility.random.float(-1, 1)),
       })
@@ -39,6 +56,8 @@ content.system.enemies = (() => {
     get: () => [...enemies],
     kill: function (enemy) {
       enemy.onKill().then(() => engine.props.destroy(enemy))
+
+      activeFrequencies.delete(enemy.rootFrequency)
       enemies.delete(enemy)
       resetCooldown()
 
@@ -52,6 +71,7 @@ content.system.enemies = (() => {
     },
     limit: () => limit,
     reset: function () {
+      activeFrequencies.clear()
       enemies.clear()
       limit = content.const.enemyLimitMin
       return this
