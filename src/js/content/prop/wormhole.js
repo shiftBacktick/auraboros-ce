@@ -85,7 +85,8 @@ content.prop.wormhole = engine.prop.base.invent({
     return this
   },
   destroyDirectionalSynth: function () {
-    this.directionalSynth.stop()
+    engine.audio.ramp.linear(this.directionalSynth.param.gain, engine.const.zeroGain, engine.const.zeroTime)
+    this.directionalSynth.stop(engine.const.zeroTime)
     delete this.directionalSynth
     return this
   },
@@ -151,9 +152,13 @@ content.prop.wormhole = engine.prop.base.invent({
     this.synth.param.fmod.detune.linearRampToValueAtTime(-600, now + 2)
     this.synth.param.gain.exponentialRampToValueAtTime(1/4, now + 1/32)
 
-    content.prop.sprite.wormholeCollapse.trigger(this, {})
+    content.prop.sprite.wormholeCollapse.trigger(this, {
+      rootFrequency: this.rootFrequency,
+    }).then(() => content.system.wormholes.kill(this))
 
-    engine.utility.timing.promise(2 * 1000).then(() => content.system.wormholes.kill(this))
+    if (this.directionalSynth) {
+      this.destroyDirectionalSynth()
+    }
 
     return this
   },

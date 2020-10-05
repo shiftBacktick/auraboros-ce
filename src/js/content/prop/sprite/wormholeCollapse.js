@@ -34,7 +34,7 @@ content.prop.sprite.wormholeCollapse = content.prop.sprite.base.invent({
     sub.param.detune.linearRampToValueAtTime(-1200, now + duration)
 
     sub.param.gain.setValueAtTime(engine.const.zeroGain, now)
-    sub.param.gain.exponentialRampToValueAtTime(gain/8, now + 1/32)
+    sub.param.gain.exponentialRampToValueAtTime(gain/4, now + 1/32)
     sub.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + duration)
 
     return engine.utility.timing.promise(duration * 1000)
