@@ -53,7 +53,8 @@ app.controls.mouse = (() => {
       }
 
       if (mouse.moveX) {
-        state.rotate = engine.utility.scale(mouse.moveX, -window.innerWidth, window.innerWidth, 1, -1) * sensitivity
+        const screenRatio = window.innerWidth / 1080
+        state.rotate = engine.utility.scale(mouse.moveX, -window.innerWidth, window.innerWidth, screenRatio, -screenRatio) * sensitivity
       }
 
       return state
