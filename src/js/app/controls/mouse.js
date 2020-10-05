@@ -1,5 +1,5 @@
 app.controls.mouse = (() => {
-  const sensitivity = 100
+  const sensitivity = 10
 
   let gameScreen
 

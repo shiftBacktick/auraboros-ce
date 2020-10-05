@@ -24,14 +24,14 @@ app.screen.tutorial = (() => {
   }
 
   function onFrame() {
-    const controls = app.controls.ui()
+    const ui = app.controls.ui()
 
-    if (controls.enter && app.utility.focus.is(start)) {
+    if ((ui.enter || ui.space) && app.utility.focus.is(start)) {
       // Native button click
       return
     }
 
-    if (controls.confirm || controls.enter || controls.space) {
+    if (ui.confirm || ui.enter || ui.space) {
       onStartClick()
     }
   }

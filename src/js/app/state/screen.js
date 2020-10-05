@@ -57,6 +57,10 @@ app.state.screen.on('exit', (e) => {
     inactive.classList.remove('a-app--screen-inactive')
     inactive.hidden = true
   }
+
+  engine.input.gamepad.reset()
+  engine.input.keyboard.reset()
+  engine.input.mouse.reset()
 })
 
 app.state.screen.on('enter', (e) => {

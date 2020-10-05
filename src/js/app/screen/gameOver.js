@@ -26,14 +26,14 @@ app.screen.gameOver = (() => {
   }
 
   function onFrame() {
-    const controls = app.controls.ui()
+    const ui = app.controls.ui()
 
-    if (controls.enter && app.utility.focus.is(restart)) {
+    if ((ui.enter || ui.space) && app.utility.focus.is(restart)) {
       // Native button click
       return
     }
 
-    if (controls.confirm || controls.enter || controls.space) {
+    if (ui.confirm || ui.enter || ui.space) {
       onRestartClick()
     }
   }

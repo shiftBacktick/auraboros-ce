@@ -9,4 +9,6 @@
   - Game start (big bang)
   - Game over (reverse of big bang)
 - Finish manual
-- Gamepad d-pad controls
+
+## Nice to have
+- Revise footsteps to be less physical
