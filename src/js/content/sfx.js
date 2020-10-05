@@ -81,6 +81,8 @@ content.sfx.gameOver = () => {
   boom.param.gain.exponentialRampToValueAtTime(4, now + 1/32)
   boom.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 1)
 
+  boom.stop(now + 1)
+
   const noise = engine.audio.synth.createAmBuffer({
     buffer: engine.audio.buffer.noise.brown(),
     carrierGain: 1,
@@ -104,6 +106,8 @@ content.sfx.gameOver = () => {
   noise.param.mod.depth.linearRampToValueAtTime(1/5, now + 2)
   noise.param.mod.frequency.exponentialRampToValueAtTime(rootFrequency, now + 2)
 
+  noise.stop(now + 2)
+
   const sub = engine.audio.synth.createFm({
     carrierDetune: -1200,
     carrierFrequency: rootFrequency,
@@ -117,6 +121,8 @@ content.sfx.gameOver = () => {
   sub.param.gain.exponentialRampToValueAtTime(1/8, now + 1/2)
   sub.param.gain.linearRampToValueAtTime(0.5, now + 2 - 1/16)
   sub.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + 2)
+
+  sub.stop(now + 2)
 }
 
 content.sfx.start = () => {
@@ -135,6 +141,8 @@ content.sfx.start = () => {
 
   boom.param.gain.exponentialRampToValueAtTime(4, now + 1/32)
   boom.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 1)
+
+  boom.stop(now + 1)
 
   const noise = engine.audio.synth.createAmBuffer({
     buffer: engine.audio.buffer.noise.brown(),
@@ -160,6 +168,8 @@ content.sfx.start = () => {
   noise.param.mod.depth.linearRampToValueAtTime(engine.const.zeroGain, now + 2)
   noise.param.mod.frequency.exponentialRampToValueAtTime(1, now + 2)
 
+  noise.stop(now + 2)
+
   const sub = engine.audio.synth.createFm({
     carrierFrequency: rootFrequency,
     modDepth: rootFrequency / 4,
@@ -170,4 +180,6 @@ content.sfx.start = () => {
 
   sub.param.gain.exponentialRampToValueAtTime(1, now + 1/32)
   sub.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 2)
+
+  sub.stop(now + 2)
 }
