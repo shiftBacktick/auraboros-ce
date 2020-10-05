@@ -1,7 +1,7 @@
 content.system.movement = (() => {
-  const angularAcceleration = Math.PI * 2,
+  const angularAcceleration = Math.PI,
     angularDeceleration = engine.const.gravity,
-    angularMaxVelocity = Math.PI,
+    angularMaxVelocity = Math.PI / 2,
     lateralAcceleration = engine.const.gravity,
     lateralDeceleration = engine.const.gravity,
     lateralMaxVelocity = 4
