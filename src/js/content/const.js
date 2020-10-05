@@ -1,10 +1,10 @@
 content.const = {
   enemyAcceleration: engine.const.gravity, // m/s
-  enemyLimitMax: 12,
+  enemyLimitMax: 8,
   enemyLimitMin: 1,
   enemyRadius: 0.5, // m
   enemyReaction: 1/8, // % chance
-  enemySpeed: 2, // m/s
+  enemySpeed: 3, // m/s
   enemySpawnRate: 1 * 1000, // ms
   horizon: 50, // m
   idealScore: (1 * 60) * (60 + (5 * 60) + (500 * 4)),
