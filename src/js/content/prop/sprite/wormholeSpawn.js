@@ -1,8 +1,14 @@
-content.prop.sprite.wormholeAlert = content.prop.sprite.base.invent({
-  name: 'sprite/wormholeAlert',
+content.prop.sprite.wormholeSpawn = content.prop.sprite.base.invent({
+  name: 'sprite/wormholeSpawn',
   play: function ({
     rootFrequency = 440,
   } = {}) {
+    return Promise.all([
+      this.playAlert(rootFrequency),
+      this.playSub(rootFrequency),
+    ])
+  },
+  playAlert: function (rootFrequency) {
     const duration = 3/6,
       gain = engine.utility.fromDb(-15)
 
@@ -29,11 +35,30 @@ content.prop.sprite.wormholeAlert = content.prop.sprite.base.invent({
 
     return engine.utility.timing.promise(duration * 1000)
   },
+  playSub: function (rootFrequency) {
+    const duration = 2,
+      now = engine.audio.time()
+
+    const sub = engine.audio.synth.createFm({
+      carrierDetune: -1200,
+      carrierFrequency: rootFrequency,
+      modDepth: rootFrequency / 4,
+      modFrequency: rootFrequency / 2,
+    }).connect(this.output)
+
+    sub.param.detune.linearRampToValueAtTime(0, now + 2 - 1/16)
+
+    sub.param.gain.exponentialRampToValueAtTime(1/8, now + 1/32)
+    sub.param.gain.exponentialRampToValueAtTime(1/128, now + 1/2)
+    sub.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + duration)
+
+    return engine.utility.timing.promise(duration * 1000)
+  },
 })
 
 engine.ready(() => {
   content.system.wormholes.on('spawn', (wormhole) => {
-    content.prop.sprite.wormholeAlert.trigger({
+    content.prop.sprite.wormholeSpawn.trigger({
       x: wormhole.x,
       y: wormhole.y,
     }, {
