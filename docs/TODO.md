@@ -8,7 +8,7 @@
 - SFX
   - Game start (big bang)
   - Game over (reverse of big bang)
-- Finish manual
 
 ## Nice to have
 - Revise footsteps to be less physical
+- Boss battles
