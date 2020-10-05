@@ -1,9 +1,17 @@
-content.prop.enemy.generic = content.prop.enemy.base.invent({
+content.prop.enemy.generic = content.prop.enemy.base.invent((parent) => ({
   name: 'enemy/generic',
   health: 1,
   points: 5,
-  call: function () {
-    return engine.utility.timing.promise(0)
+  onConstruct: function () {
+    parent.onConstruct.apply(this, arguments)
+    this.createSynth()
+  },
+  onDestroy: function () {
+    this.destroySynth()
+  },
+  onUpdate: function () {
+    parent.onUpdate.apply(this, arguments)
+    // TODO: Update synth
   },
   createSynth: function () {
     this.synth = engine.audio.synth.createSimple({
@@ -22,4 +30,4 @@ content.prop.enemy.generic = content.prop.enemy.base.invent({
 
     return engine.utility.timing.promise(1000)
   },
-})
+}))

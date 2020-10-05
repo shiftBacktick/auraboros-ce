@@ -4,22 +4,12 @@ content.prop.enemy.base = engine.prop.base.invent({
   health: 0,
   points: 0,
   onConstruct: function () {
-    this.createSynth()
     this.velocity = this.getSpawnVelocity()
-  },
-  onDestroy: function () {
-    this.destroySynth()
   },
   onUpdate: function () {
     if (this.isDead) {
       return
     }
-
-    this.handlePeriodic({
-      delay: () => 0,
-      key: 'call',
-      trigger: () => this.call(),
-    })
 
     const shouldReact = Math.random() < content.const.enemyReaction
 
@@ -29,11 +19,6 @@ content.prop.enemy.base = engine.prop.base.invent({
 
     this.velocity = content.utility.accelerate.vector(this.velocity, this.getTargetVelocity(), content.const.enemyAcceleration)
   },
-  call: function () {
-    return engine.utility.timing.promise(0)
-  },
-  createSynth: function () {},
-  destroySynth: function () {},
   getSpawnVelocity: function () {
     const velocity = this.getTargetVelocity().inverse().rotateEuler({
       yaw: engine.utility.random.float(-1, 1) * Math.PI / 2,
