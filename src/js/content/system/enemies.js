@@ -1,8 +1,7 @@
 content.system.enemies = (() => {
-  const enemies = new Set(),
+  const activeFrequencies = new Set(),
+    enemies = new Set(),
     pubsub = engine.utility.pubsub.create()
-
-  const activeFrequencies = new Set()
 
   const allowedFrequencies = [
     57, 59, 60, 62, 64, 65, 67,
@@ -73,7 +72,9 @@ content.system.enemies = (() => {
     reset: function () {
       activeFrequencies.clear()
       enemies.clear()
+
       limit = content.const.enemyLimitMin
+
       return this
     },
     update: function () {
