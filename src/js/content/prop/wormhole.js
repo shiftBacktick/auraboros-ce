@@ -189,8 +189,8 @@ content.prop.wormhole = engine.prop.base.invent({
       : 0
 
     const gain = isLocked
-      ? this.calculateGainCompensation(engine.utility.fromDb(-19.5))
-      : strength * this.calculateGainCompensation(engine.utility.fromDb(-24))
+      ? this.calculateGainCompensation(engine.utility.fromDb(-16.5))
+      : strength * this.calculateGainCompensation(engine.utility.fromDb(-21))
 
     const modDepth = isLocked
       ? 0.5

@@ -43,10 +43,13 @@ content.sfx.footstep = ({
 
   const synth = engine.audio.synth.createBuffer({
     buffer: engine.audio.buffer.noise.brown(),
-  }).filtered()
+  }).filtered().chainAssign('highpassFilter', engine.audio.context().createBiquadFilter())
 
-  const frequency = engine.utility.lerpRandom([250, 500], [1000, 2000], strength),
-    gain = engine.utility.fromDb(engine.utility.lerp(-18, -15, strength)),
+  synth.highpassFilter.frequency.value = 200
+  synth.highpassFilter.type = 'highpass'
+
+  const frequency = engine.utility.lerpRandom([200, 280], [280, 360], strength),
+    gain = engine.utility.fromDb(engine.utility.lerp(-21, -18, strength)),
     now = engine.audio.time()
 
   binaural.from(synth.output).to(content.sfx.bus).update({
@@ -54,12 +57,12 @@ content.sfx.footstep = ({
     y,
   })
 
-  synth.filter.frequency.setValueAtTime(frequency * 2, now)
-  synth.filter.frequency.exponentialRampToValueAtTime(frequency / 2, now + 1/4)
+  synth.filter.frequency.setValueAtTime(frequency / 2, now)
+  synth.filter.frequency.exponentialRampToValueAtTime(frequency, now + 1)
 
   synth.param.gain.setValueAtTime(engine.const.zeroGain, now)
-  synth.param.gain.exponentialRampToValueAtTime(gain, now + 1/32)
-  synth.param.gain.exponentialRampToValueAtTime(engine.const.zeroGain, now + 1/2)
+  synth.param.gain.linearRampToValueAtTime(gain, now + 1/2)
+  synth.param.gain.linearRampToValueAtTime(engine.const.zeroGain, now + 1)
 
   synth.stop(now + 1)
 }

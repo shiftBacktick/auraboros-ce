@@ -79,6 +79,7 @@ content.system.movement = (() => {
   }
 
   return {
+    getLateralThrust: () => lateralThrust.clone(),
     getLateralVelocityRatio: () => engine.utility.clamp(engine.position.getVelocity().distance() / lateralMaxVelocity, 0, 1),
     reset: function () {
       angularThrust = 0
