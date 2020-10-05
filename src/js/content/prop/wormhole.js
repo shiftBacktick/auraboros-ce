@@ -151,23 +151,7 @@ content.prop.wormhole = engine.prop.base.invent({
     this.synth.param.fmod.detune.linearRampToValueAtTime(-600, now + 2)
     this.synth.param.gain.exponentialRampToValueAtTime(1/4, now + 1/32)
 
-    const synth = engine.audio.synth.createAmBuffer({
-      buffer: engine.audio.buffer.noise.pink(),
-      carrierGain: 0.5,
-      modDepth: 0.5,
-    }).filtered().connect(this.output)
-
-    synth.filter.frequency.setValueAtTime(80, now)
-    synth.filter.frequency.exponentialRampToValueAtTime(800, now + 2)
-
-    synth.param.gain.setValueAtTime(engine.const.zeroGain, now)
-    synth.param.gain.exponentialRampToValueAtTime(1, now + 1/32)
-    synth.param.gain.linearRampToValueAtTime(1/64, now + 2)
-
-    synth.param.mod.frequency.setValueAtTime(27.5, now)
-    synth.param.mod.frequency.exponentialRampToValueAtTime(3.4375, now + 2)
-
-    synth.stop(now + 2)
+    content.prop.sprite.wormholeCollapse.trigger(this, {})
 
     engine.utility.timing.promise(2 * 1000).then(() => content.system.wormholes.kill(this))
 
