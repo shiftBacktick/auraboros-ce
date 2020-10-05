@@ -72,14 +72,18 @@ content.prop.wormhole = engine.prop.base.invent({
       return 0
     }
 
-    return engine.utility.scale(cos, engine.const.unit2, 1, 0, 1) ** 100
+    return engine.utility.scale(cos, engine.const.unit2, 1, 0, 1) ** 75
   },
   createDirectionalSynth: function () {
-    this.directionalSynth = engine.audio.synth.createSimple({
-      frequency: this.rootFrequency * 4,
-      type: 'triangle',
+    this.directionalSynth = engine.audio.synth.createAm({
+      carrierGain: 1,
+      carrierFrequency: this.rootFrequency * 8,
+      carrierType: 'triangle',
+      modDepth: engine.const.zeroGain,
+      modFrequency: 0,
+      modType: 'square',
     }).filtered({
-      frequency: this.rootFrequency * 2,
+      frequency: this.rootFrequency * 6,
     }).connect(this.output)
 
     return this
@@ -174,8 +178,35 @@ content.prop.wormhole = engine.prop.base.invent({
     return this
   },
   updateDirectionalSynth: function (strength = 0) {
-    const gain = strength * this.calculateGainCompensation(engine.utility.fromDb(-21))
+    const isLocked = (strength > 0.95) && (this.distance < content.const.horizon / 2)
+
+    const detune = isLocked
+      ? 0
+      : engine.utility.lerp(-500, 0, strength)
+
+    const filterDetune = isLocked
+      ? -1200
+      : 0
+
+    const gain = isLocked
+      ? this.calculateGainCompensation(engine.utility.fromDb(-19.5))
+      : strength * this.calculateGainCompensation(engine.utility.fromDb(-24))
+
+    const modDepth = isLocked
+      ? 0.5
+      : 0.5 * ((1 - strength) ** 0.25)
+
+    const modFrequency = isLocked
+      ? 5
+      : engine.utility.lerp(3.4375, 27.5, strength)
+
+    engine.audio.ramp.set(this.directionalSynth.filter.detune, filterDetune)
+    engine.audio.ramp.set(this.directionalSynth.param.carrierGain, 1 - modDepth)
+    engine.audio.ramp.set(this.directionalSynth.param.detune, detune)
     engine.audio.ramp.set(this.directionalSynth.param.gain, gain)
+    engine.audio.ramp.set(this.directionalSynth.param.mod.depth, modDepth)
+    engine.audio.ramp.set(this.directionalSynth.param.mod.frequency, modFrequency)
+
     return this
   },
 })

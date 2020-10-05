@@ -16,7 +16,7 @@ content.prop.matter = engine.prop.base.invent({
 
     this.synth = engine.audio.synth.createBuffer({
       buffer,
-      gain: engine.utility.fromDb(-12),
+      gain: engine.utility.fromDb(-15),
     }).filtered({
       frequency: frequency * 1.25,
       Q: 50,

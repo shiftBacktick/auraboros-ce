@@ -9,11 +9,11 @@ content.system.audio.arena = (() => {
   const binaural = engine.audio.binaural.create().from(boundary.output).to(bus)
 
   const singularity = engine.audio.synth.createAm({
-    carrierGain: 2/3,
+    carrierGain: 5/9,
     carrierFrequency: 22.5,
     carrierType: 'square',
-    modDepth: 1/3,
-    modFrequency: 2,
+    modDepth: 4/9,
+    modFrequency: 0,
   }).shaped(
     engine.audio.shape.noise()
   ).filtered({
@@ -55,7 +55,7 @@ content.system.audio.arena = (() => {
 
       const boundaryGain = engine.utility.lerpExp(engine.const.zeroGain, 0.25, boundaryDistanceRatio, content.const.horizon / 3),
         singularityGain = engine.utility.lerpExp(1, engine.const.zeroGain, singularityDistanceRatio, 1/4),
-        singularityModFrequency = engine.utility.lerp(2, 20, scoreRatio)
+        singularityModFrequency = engine.utility.lerpExp(1/5, 10, scoreRatio, 0.5)
 
       binaural.update(
         getBinauralVector()
