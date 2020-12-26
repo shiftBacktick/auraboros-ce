@@ -19,4 +19,3 @@ content.const = {
 }
 
 engine.const.distancePower = 2
-engine.const.propFadeDuration = 1/8
