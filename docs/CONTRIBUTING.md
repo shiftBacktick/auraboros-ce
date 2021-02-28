@@ -1,0 +1,1 @@
+# Auraboros CE contribution guidelines
